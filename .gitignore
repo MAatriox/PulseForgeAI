@@ -1,0 +1,22 @@
+# Local secrets - never commit real API keys
+.env
+.env.*
+!.env.example
+config.local.json
+
+# Build output
+build/
+target/
+out/
+*.class
+
+# Local runtime data (athlete profile, exported reports)
+data/
+pulseforge-audit.*
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
