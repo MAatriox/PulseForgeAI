@@ -1,0 +1,25 @@
+{
+  "dailySummaries": [
+    {"calendarDate": "2026-10-24", "restingHeartRate": 54.3, "hrvLastNightAvg": 64.8, "activeKilocalories": 415, "sleep": {"deepSleepSeconds": 5340, "remSleepSeconds": 6420, "lightSleepSeconds": 16260, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-10-25", "restingHeartRate": 54.1, "hrvLastNightAvg": 67.7, "activeKilocalories": 654, "sleep": {"deepSleepSeconds": 5340, "remSleepSeconds": 6480, "lightSleepSeconds": 16380, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-10-26", "restingHeartRate": 56.4, "hrvLastNightAvg": 69.5, "activeKilocalories": 508, "sleep": {"deepSleepSeconds": 5280, "remSleepSeconds": 6360, "lightSleepSeconds": 16080, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-10-27", "restingHeartRate": 55.7, "hrvLastNightAvg": 63.9, "activeKilocalories": 468, "sleep": {"deepSleepSeconds": 4980, "remSleepSeconds": 6060, "lightSleepSeconds": 15300, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-10-28", "restingHeartRate": 53.9, "hrvLastNightAvg": 63.5, "activeKilocalories": 757, "sleep": {"deepSleepSeconds": 5280, "remSleepSeconds": 6420, "lightSleepSeconds": 16140, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-10-29", "restingHeartRate": 55.4, "hrvLastNightAvg": 59, "activeKilocalories": 570, "sleep": {"deepSleepSeconds": 5640, "remSleepSeconds": 6840, "lightSleepSeconds": 17220, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-10-30", "restingHeartRate": 55, "hrvLastNightAvg": 60.7, "activeKilocalories": 517, "sleep": {"deepSleepSeconds": 5340, "remSleepSeconds": 6420, "lightSleepSeconds": 16200, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-10-31", "restingHeartRate": 53.3, "hrvLastNightAvg": 64.5, "activeKilocalories": 449, "sleep": {"deepSleepSeconds": 5400, "remSleepSeconds": 6480, "lightSleepSeconds": 16440, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-11-01", "restingHeartRate": 54.6, "hrvLastNightAvg": 59, "activeKilocalories": 555, "sleep": {"deepSleepSeconds": 5160, "remSleepSeconds": 6240, "lightSleepSeconds": 15720, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-11-02", "restingHeartRate": 55.9, "hrvLastNightAvg": 60.7, "activeKilocalories": 461, "sleep": {"deepSleepSeconds": 5220, "remSleepSeconds": 6300, "lightSleepSeconds": 15900, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-11-03", "restingHeartRate": 57.8, "hrvLastNightAvg": 60.5, "activeKilocalories": 588, "sleep": {"deepSleepSeconds": 4740, "remSleepSeconds": 5760, "lightSleepSeconds": 14580, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-11-04", "restingHeartRate": 56.1, "hrvLastNightAvg": 59.1, "activeKilocalories": 584, "sleep": {"deepSleepSeconds": 5340, "remSleepSeconds": 6480, "lightSleepSeconds": 16380, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-11-05", "restingHeartRate": 53.4, "hrvLastNightAvg": 55, "activeKilocalories": 485, "sleep": {"deepSleepSeconds": 5040, "remSleepSeconds": 6120, "lightSleepSeconds": 15420, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-11-06", "restingHeartRate": 55.3, "hrvLastNightAvg": 67.7, "activeKilocalories": 709, "sleep": {"deepSleepSeconds": 5940, "remSleepSeconds": 7200, "lightSleepSeconds": 18120, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-11-07", "restingHeartRate": 53.9, "hrvLastNightAvg": 68.3, "activeKilocalories": 520, "sleep": {"deepSleepSeconds": 5340, "remSleepSeconds": 6480, "lightSleepSeconds": 16260, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-11-08", "restingHeartRate": 56.1, "hrvLastNightAvg": 60.1, "activeKilocalories": 518, "sleep": {"deepSleepSeconds": 4920, "remSleepSeconds": 6000, "lightSleepSeconds": 15060, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-11-09", "restingHeartRate": 56.2, "hrvLastNightAvg": 61.5, "activeKilocalories": 562, "sleep": {"deepSleepSeconds": 5460, "remSleepSeconds": 6600, "lightSleepSeconds": 16560, "awakeSleepSeconds": 1200}},
+    {"calendarDate": "2026-11-10", "restingHeartRate": 62.2, "hrvLastNightAvg": 44.4, "activeKilocalories": 603, "sleep": {"deepSleepSeconds": 2460, "remSleepSeconds": 3180, "lightSleepSeconds": 13080, "awakeSleepSeconds": 2400}},
+    {"calendarDate": "2026-11-11", "restingHeartRate": 64.1, "hrvLastNightAvg": 39.2, "activeKilocalories": 464, "sleep": {"deepSleepSeconds": 2700, "remSleepSeconds": 3480, "lightSleepSeconds": 14400, "awakeSleepSeconds": 2400}},
+    {"calendarDate": "2026-11-12", "restingHeartRate": 65.8, "hrvLastNightAvg": 36.2, "activeKilocalories": 717, "sleep": {"deepSleepSeconds": 2520, "remSleepSeconds": 3300, "lightSleepSeconds": 13560, "awakeSleepSeconds": 2400}},
+    {"calendarDate": "2026-11-13", "restingHeartRate": 66.2, "hrvLastNightAvg": 33, "activeKilocalories": 600, "sleep": {"deepSleepSeconds": 2460, "remSleepSeconds": 3240, "lightSleepSeconds": 13260, "awakeSleepSeconds": 2400}}
+  ]
+}
