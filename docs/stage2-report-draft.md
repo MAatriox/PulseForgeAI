@@ -64,7 +64,7 @@ GUI and the CLI (see Section 2).
 
 ## 2. Feature to implementation mapping
 
-Video links: **TODO** for every feature.
+Demonstration video (all features): https://youtu.be/iMptiQ0aN4s. Per-feature timestamps are marked TODO; add them from the video.
 
 ### F01 - Multi-Source Biometric & Health Ingestion
 
@@ -76,7 +76,7 @@ Video links: **TODO** for every feature.
 | Key methods | `WorkoutGUI.onImportHealthClicked()`, `WorkoutCLI.importFile()`, `PulseForgeFacade.importHealthData()`, `HealthParserFactory.forFile()`, `FitnessDataParser.parse()`, `XmlParser.forEachElement()`, `BiometricRecord.validate()`, `AthleteProfile.storeRecords()` |
 | Design patterns | Adapter, Facade, Observer |
 | Type | Deterministic |
-| Video | TODO |
+| Video | https://youtu.be/iMptiQ0aN4s (timestamp: **TODO**) |
 
 Flow: the UI passes the chosen path to the facade. `HealthParserFactory` selects an adapter by
 extension. The adapter parses the vendor format (Apple: averages resting HR/HRV, sums active
@@ -85,6 +85,25 @@ energy, sums sleep-stage intervals onto the wake-up date), validates each day an
 notifies observers (the repository saves; views refresh), then recomputes readiness (UC02).
 Errors: corrupt XML, missing mandatory fields, out-of-range values or unsupported file types
 raise `InvalidHealthDataException`; the UI shows the reason and stored data is untouched.
+
+
+**Screenshots (save in `docs/screenshots/`):**
+
+![F01: GUI: Biometrics > Import Health File, file chooser showing sample-data/apple_health_export.xml](screenshots/f01-gui-biometrics-import.png)
+
+*Figure: GUI: Biometrics > Import Health File, file chooser showing sample-data/apple_health_export.xml.* **TODO: capture.**
+
+![F01: Success dialog with imported day count and updated dashboard gauge](screenshots/f01-gui-import-success.png)
+
+*Figure: Success dialog with imported day count and updated dashboard gauge.* **TODO: capture.**
+
+![F01: Error dialog after importing a corrupt/unsupported file](screenshots/f01-gui-import-error.png)
+
+*Figure: Error dialog after importing a corrupt/unsupported file.* **TODO: capture.**
+
+![F01: CLI: `import sample-data/garmin_export.json` output](screenshots/f01-cli-import.png)
+
+*Figure: CLI: `import sample-data/garmin_export.json` output.* **TODO: capture.**
 
 ### F02 - Multimodal Meal Photo Calorie & Macronutrient Analyzer
 
@@ -96,13 +115,32 @@ raise `InvalidHealthDataException`; the UI shows the reason and stored data is u
 | Key methods | `WorkoutGUI.onUploadMealImageClicked()`, `onAnalyzeMealClicked()`, `onConfirmMealClicked()`, `WorkoutCLI.meal()`, `PulseForgeFacade.analyzeMealPhoto()`, `confirmMeal()`, `addManualMeal()`, `VisionNutritionService.analyzeMeal()`, `LLMClient.generate()`, `MealLog.create()` |
 | Design patterns | Facade |
 | Type | AI-based |
-| Video | TODO |
+| Video | https://youtu.be/iMptiQ0aN4s (timestamp: **TODO**) |
 
 Flow: the image is checked (type, size), attached to a multimodal request with a strict JSON
 schema, and the reply is decoded into an unsaved `MealLog`. The GUI shows it in an editable
 table; **Confirm Meal** saves it and triggers F04. Errors: empty food list or confidence below
 0.5 raises `UnrecognizedFoodException` ("retake or enter manually"); a network/model failure
 offers manual entry.
+
+
+**Screenshots (save in `docs/screenshots/`):**
+
+![F02: Diet & Nutrition tab with uploaded food photo thumbnail](screenshots/f02-gui-meal-preview.png)
+
+*Figure: Diet & Nutrition tab with uploaded food photo thumbnail.* **TODO: capture.**
+
+![F02: Editable result table after Analyze Meal, before Confirm](screenshots/f02-gui-meal-table.png)
+
+*Figure: Editable result table after Analyze Meal, before Confirm.* **TODO: capture.**
+
+![F02: "Retake photo or enter manually" message for a non-food image](screenshots/f02-gui-meal-unrecognized.png)
+
+*Figure: "Retake photo or enter manually" message for a non-food image.* **TODO: capture.**
+
+![F02: Diet & Nutrition tab: meal photo analyzer (no image yet) beside the energy balance panel](screenshots/f02-gui-meal-tab.png)
+
+*Figure: Diet & Nutrition tab: meal photo analyzer (no image yet) beside the energy balance panel.*
 
 ### F03 - Sleep Architecture & Circadian Recovery Scorer
 
@@ -114,13 +152,32 @@ offers manual entry.
 | Key methods | `PulseForgeFacade.getTodayReadiness()`, `ReadinessCalculator.computeReadiness()`, `computeFor()`, `stats()`, `sleepArchitectureScore()`, `AthleteProfile.updateReadiness()`, `notifyObservers()`, `ProfileObserver.onProfileUpdated()` |
 | Design patterns | Observer, Facade |
 | Type | Deterministic |
-| Video | TODO |
+| Video | https://youtu.be/iMptiQ0aN4s (timestamp: **TODO**) |
 
 Flow: z-scores for HRV, resting HR, sleep duration and deep sleep are computed against the
 previous 7 days, combined (35/25/25/15 %), mapped to 0-100 and blended 65/35 with an absolute
 sleep-architecture score (duration, efficiency, REM %, deep minutes). The result is stored via
 `updateReadiness`, which notifies the GUI gauge and CLI console. Alternative: with fewer than
 3 baseline days, population defaults are used and the score is flagged "Approximation".
+
+
+**Screenshots (save in `docs/screenshots/`):**
+
+![F03: Dashboard readiness gauge with tier and sleep breakdown card](screenshots/f03-gui-readiness-gauge.png)
+
+*Figure: Dashboard readiness gauge with tier and sleep breakdown card.*
+
+![F03: Gauge showing the "Approximation" flag (fewer than 3 days of data)](screenshots/f03-gui-readiness-approx.png)
+
+*Figure: Gauge showing the "Approximation" flag (fewer than 3 days of data).* **TODO: capture.**
+
+![F03: CLI `status` output](screenshots/f03-cli-status.png)
+
+*Figure: CLI `status` output.* **TODO: capture.**
+
+![F03: Analytics & Export: 21-day readiness history with z-scores and tiers](screenshots/f03-gui-readiness-history.png)
+
+*Figure: Analytics & Export: 21-day readiness history with z-scores and tiers.*
 
 ### F04 - Energy Balance & Caloric Sufficiency Arbiter
 
@@ -132,13 +189,28 @@ sleep-architecture score (duration, efficiency, REM %, deep minutes). The result
 | Key methods | `WorkoutGUI.displayEnergyReport()`, `WorkoutCLI.energy()`, `PulseForgeFacade.reconcileEnergyBalance()`, `EnergyBalanceCalculator.calculate()`, `wearableActive()`, `AthleteProfile.bmr()`, `LLMClient.generate()` |
 | Design patterns | Facade |
 | Type | Hybrid |
-| Video | TODO |
+| Video | https://youtu.be/iMptiQ0aN4s (timestamp: **TODO**) |
 
 Flow: burned = BMR (Mifflin-St Jeor) + wearable active energy + estimated lifting energy;
 consumed = today's meals. Goal-specific thresholds give Sufficed / Under-Fueled /
 Hyper-Caloric Surplus, and protein is compared with 1.8 g/kg. The numbers are then given to
 the LLM for fueling advice; if the model fails, rule-based advice is shown and labeled.
 Alternative: a session logged with no meals after 19:00 raises the Under-Fueled Alert.
+
+
+**Screenshots (save in `docs/screenshots/`):**
+
+![F04: Energy & Diet Balance card: Burned vs Consumed and status banner](screenshots/f04-gui-energy-report.png)
+
+*Figure: Energy & Diet Balance card: Burned vs Consumed and status banner.*
+
+![F04: AI fueling advice displayed](screenshots/f04-gui-energy-advice.png)
+
+*Figure: AI fueling advice displayed.* **TODO: capture.**
+
+![F04: Under-Fueled Alert (session logged, no meals after 19:00)](screenshots/f04-gui-underfueled-alert.png)
+
+*Figure: Under-Fueled Alert (session logged, no meals after 19:00).* **TODO: capture.**
 
 ### F05 - Sleep- and Readiness-Calibrated Workout Generator
 
@@ -150,7 +222,7 @@ Alternative: a session logged with no meals after 19:00 raises the Under-Fueled 
 | Key methods | `WorkoutGUI.onGenerateRoutineClicked()`, `displayRoutine()`, `WorkoutCLI.generate()`, `PulseForgeFacade.generateAdaptedWorkout()`, `AgentBridge.setStrategy()`, `buildWorkout()`, `WorkoutStrategy.computeLimits()`, `generatePlan()`, `fallbackPlan()`, `WorkoutJsonMapper.toRoutine()`, `WorkoutSessionManager.stageRoutine()` |
 | Design patterns | Strategy, Facade |
 | Type | Hybrid |
-| Video | TODO |
+| Video | https://youtu.be/iMptiQ0aN4s (timestamp: **TODO**) |
 
 Flow: the facade sets the chosen strategy on `AgentBridge` and builds a `StrategyContext`
 (readiness, tier, sleep, goal). The strategy computes hard limits (sets, rep range, RPE cap,
@@ -159,6 +231,21 @@ clamps anything that exceeds them. The routine is staged in `WorkoutSessionManag
 Alternatives: `ModelInferenceException` (timeout, HTTP error, malformed or empty JSON) makes
 `AgentBridge` use the strategy's offline template; if the fatigue sentinel fires, a Recovery
 Warning offers UC08.
+
+
+**Screenshots (save in `docs/screenshots/`):**
+
+![F05: Gym Planner with split and strategy selected](screenshots/f05-gui-planner-generate.png)
+
+*Figure: Gym Planner with split and strategy selected.*
+
+![F05: Generated routine with sets, reps, RPE caps](screenshots/f05-gui-routine.png)
+
+*Figure: Generated routine with sets, reps, RPE caps.*
+
+![F05: Offline fallback template (run with no API key)](screenshots/f05-cli-generate-fallback.png)
+
+*Figure: Offline fallback template (run with no API key).* **TODO: capture.**
 
 ### F06 - Interactive Set & Rep Logger with Command Undo/Redo
 
@@ -170,7 +257,7 @@ Warning offers UC08.
 | Key methods | `WorkoutGUI.onLogSetClicked()`, `WorkoutCLI.log()`, `PulseForgeFacade.logSet()`, `deleteExercise()`, `undoLastAction()`, `redoLastAction()`, `CommandInvoker.executeCommand()`, `undo()`, `redo()`, `LogSetCommand.validate()`, `execute()`, `undo()` |
 | Design patterns | Command, Facade, Observer (session listeners) |
 | Type | Deterministic |
-| Video | TODO |
+| Video | https://youtu.be/iMptiQ0aN4s (timestamp: **TODO**) |
 
 Flow: the facade builds a `LogSetCommand` (validation happens in its constructor, so bad input
 never creates a command) and hands it to `CommandInvoker`, which executes it and pushes it on
@@ -178,6 +265,25 @@ the undo stack. The command snapshots the target set, records the values on the 
 starts the rest timer. Undo restores the snapshot and moves the command to the redo stack.
 Alternatives: negative or non-numeric input is rejected with no state change; an empty undo
 stack disables the GUI button and prints "No actions to undo." in the CLI.
+
+
+**Screenshots (save in `docs/screenshots/`):**
+
+![F06: Live Session with a set logged and tonnage updated](screenshots/f06-gui-log-set.png)
+
+*Figure: Live Session with a set logged and tonnage updated.* **TODO: capture.**
+
+![F06: Table after Undo, then after Redo](screenshots/f06-gui-undo-redo.png)
+
+*Figure: Table after Undo, then after Redo.* **TODO: capture.**
+
+![F06: Validation alert for negative/non-numeric input](screenshots/f06-gui-log-invalid.png)
+
+*Figure: Validation alert for negative/non-numeric input.* **TODO: capture.**
+
+![F06: Live Session tab with the staged routine, log-set form and smart rest timer (idle)](screenshots/f06-gui-live-session-idle.png)
+
+*Figure: Live Session tab with the staged routine, log-set form and smart rest timer (idle).*
 
 ### F07 - Biometric-Adaptive Smart Rest & Recovery Timer
 
@@ -189,7 +295,7 @@ stack disables the GUI button and prints "No actions to undo." in the CLI.
 | Key methods | `LogSetCommand.execute()`, `WorkoutSessionManager.startTimer()`, `SmartRestEngine.computeRestSeconds()`, `RestTimer.start()`, `tick()`, `addTime()`, `skip()`, `abort()`, `WorkoutGUI.updateTimerDisplay()` |
 | Design patterns | Command (trigger), Observer (tick listeners) |
 | Type | Deterministic |
-| Video | TODO |
+| Video | https://youtu.be/iMptiQ0aN4s (timestamp: **TODO**) |
 
 Flow: after a set is logged, rest length is computed from movement type and RPE (compound
 RPE 9 = 180 s, isolation RPE 7 = 75 s). `RestTimer` ticks every second and notifies listeners;
@@ -197,6 +303,17 @@ the GUI shows the countdown with **+30s** and **Skip** and beeps at zero. With t
 heart-rate source enabled, the timer holds at zero until heart rate is under 60 % of maximum.
 Alternative: skipping, or logging the next set early, stops the countdown and records the
 actual rest taken on the set.
+
+
+**Screenshots (save in `docs/screenshots/`):**
+
+![F07: Countdown with +30s and Skip buttons](screenshots/f07-gui-rest-timer.png)
+
+*Figure: Countdown with +30s and Skip buttons.* **TODO: capture.**
+
+![F07: Timer holding at zero with simulated heart rate enabled](screenshots/f07-gui-rest-hr-hold.png)
+
+*Figure: Timer holding at zero with simulated heart rate enabled.* **TODO: capture.**
 
 ### F08 - Proactive Overtraining & CNS Fatigue Sentinel / Deload Week Planner
 
@@ -208,7 +325,7 @@ actual rest taken on the set.
 | Key methods | `PulseForgeFacade.assessFatigue()`, `diagnoseFatigue()`, `planDeloadWeek()`, `declineDeload()`, `FatigueSentinel.evaluate()`, `AgentBridge.setStrategy()`, `DeloadStrategy.generatePlan()`, `fallbackPlan()`, `AthleteProfile.setDeloadCalendar()`, `declineDeload()` |
 | Design patterns | Strategy, Facade, Observer |
 | Type | Hybrid |
-| Video | TODO |
+| Video | https://youtu.be/iMptiQ0aN4s (timestamp: **TODO**) |
 
 Flow: the sentinel counts consecutive days of suppressed HRV with under 7 h sleep, consecutive
 days of readiness below 40, the tonnage trend and missing days, and assigns Low / Elevated /
@@ -217,6 +334,29 @@ swaps `AgentBridge` to `DeloadStrategy`, which produces seven days (at most 9 se
 day, RPE 7 or lower), saves them to the profile and restores the previous strategy.
 Alternatives: missing days are listed and push the guidance conservative; declining suppresses
 the warning for 72 h and lowers RPE caps by 1.
+
+
+**Screenshots (save in `docs/screenshots/`):**
+
+![F08: Recovery Warning modal](screenshots/f08-gui-recovery-warning.png)
+
+*Figure: Recovery Warning modal.* **TODO: capture.**
+
+![F08: Fatigue diagnosis with risk level (Critical on sample data)](screenshots/f08-gui-fatigue-diagnosis.png)
+
+*Figure: Fatigue diagnosis with risk level (Critical on sample data).* **TODO: capture.**
+
+![F08: 7-day deload week listing](screenshots/f08-gui-deload-week.png)
+
+*Figure: 7-day deload week listing.* **TODO: capture.**
+
+![F08: Declined deload message (72 h suppression)](screenshots/f08-cli-deload-decline.png)
+
+*Figure: Declined deload message (72 h suppression).* **TODO: capture.**
+
+![F08: Dashboard: Overtraining risk CRITICAL with View Fatigue Diagnosis / Plan Deload Week / Decline Deload buttons](screenshots/f08-gui-sentinel-panel.png)
+
+*Figure: Dashboard: Overtraining risk CRITICAL with View Fatigue Diagnosis / Plan Deload Week / Decline Deload buttons.*
 
 ### F09 - Natural Language Holistic Training & Diet Coach
 
@@ -228,7 +368,7 @@ the warning for 72 h and lowers RPE caps by 1.
 | Key methods | `WorkoutGUI.onAskCoachClicked()`, `WorkoutCLI.coach()`, `PulseForgeFacade.askCoach()`, `AgentBridge.queryAgent()`, `Guardrails.screen()`, `AgentTool.execute()`, `CoachMemory.add()`, `LLMClient.generate()` |
 | Design patterns | Facade |
 | Type | AI-based |
-| Video | TODO |
+| Video | https://youtu.be/iMptiQ0aN4s (timestamp: **TODO**) |
 
 Flow: the question is screened; if allowed, the model replies with either a tool request or a
 final answer in JSON. Tool results are appended to the conversation and the loop continues
@@ -236,6 +376,25 @@ final answer in JSON. Tool results are appended to the conversation and the loop
 Alternatives: medical questions get a disclaimer and emergencies an urgent-care message, both
 without calling the model; if the model is unreachable, the user gets a labeled offline
 snapshot of readiness and energy data.
+
+
+**Screenshots (save in `docs/screenshots/`):**
+
+![F09: AI Coach answer showing "tools used"](screenshots/f09-gui-coach-answer.png)
+
+*Figure: AI Coach answer showing "tools used".* **TODO: capture.**
+
+![F09: Medical question returning the disclaimer](screenshots/f09-gui-coach-guardrail.png)
+
+*Figure: Medical question returning the disclaimer.* **TODO: capture.**
+
+![F09: CLI `coach ...` output](screenshots/f09-cli-coach.png)
+
+*Figure: CLI `coach ...` output.* **TODO: capture.**
+
+![F09: AI Coach tab with Gemini (gemini-flash-lite-latest) connected](screenshots/f09-gui-coach-tab.png)
+
+*Figure: AI Coach tab with Gemini (gemini-flash-lite-latest) connected.*
 
 ### F10 - Integrated Fitness, Sleep & Diet Audit Exporter
 
@@ -247,12 +406,27 @@ snapshot of readiness and energy data.
 | Key methods | `WorkoutGUI.onExportReportClicked()`, `WorkoutCLI.export()`, `PulseForgeFacade.exportReport()`, `ReportGenerator.compileAudit()`, `writeToFile()`, `SimplePdfWriter.write()` |
 | Design patterns | Facade |
 | Type | Deterministic |
-| Video | TODO |
+| Video | https://youtu.be/iMptiQ0aN4s (timestamp: **TODO**) |
 
 Flow: `compileAudit` gathers records, readiness, meals, sessions and saved AI notes for the
 range, builds summary, weekly-average and daily tables, and `writeToFile` writes Markdown or
 PDF. Alternative: an unwritable or missing folder raises `IOException`; the GUI reopens the
 file chooser and the CLI asks for another `--out`; data stays in memory.
+
+
+**Screenshots (save in `docs/screenshots/`):**
+
+![F10: Analytics & Export with date range and format](screenshots/f10-gui-export-dialog.png)
+
+*Figure: Analytics & Export with date range and format.*
+
+![F10: Exported audit PDF opened in a viewer](screenshots/f10-export-pdf-open.png)
+
+*Figure: Exported audit PDF opened in a viewer.* **TODO: capture.**
+
+![F10: Unwritable folder error and re-prompt](screenshots/f10-gui-export-error.png)
+
+*Figure: Unwritable folder error and re-prompt.* **TODO: capture.**
 
 ---
 
@@ -409,13 +583,13 @@ See Section 1.
 
 | Feature | Interface shown | Video link / timestamp |
 |---|---|---|
-| F01 Biometric ingestion (incl. corrupt-file error) | GUI + CLI | TODO |
-| F02 Meal photo analyzer (incl. unrecognized image) | GUI | TODO |
-| F03 Readiness scorer (incl. approximation with < 3 days) | GUI + CLI | TODO |
-| F04 Energy balance (incl. under-fueled alert) | GUI | TODO |
-| F05 Workout generator (incl. offline fallback) | GUI + CLI | TODO |
-| F06 Set logger with undo/redo (incl. invalid input) | GUI + CLI | TODO |
-| F07 Smart rest timer (incl. skip, +30s, HR hold) | GUI | TODO |
-| F08 Fatigue sentinel and deload planner (incl. decline) | GUI + CLI | TODO |
-| F09 AI coach (incl. medical guardrail) | GUI + CLI | TODO |
-| F10 Audit exporter (incl. unwritable folder) | GUI + CLI | TODO |
+| F01 Biometric ingestion (incl. corrupt-file error) | GUI + CLI | [video](https://youtu.be/iMptiQ0aN4s) |
+| F02 Meal photo analyzer (incl. unrecognized image) | GUI | [video](https://youtu.be/iMptiQ0aN4s) (timestamp TODO) |
+| F03 Readiness scorer (incl. approximation with < 3 days) | GUI + CLI | [video](https://youtu.be/iMptiQ0aN4s) (timestamp TODO) |
+| F04 Energy balance (incl. under-fueled alert) | GUI | [video](https://youtu.be/iMptiQ0aN4s) (timestamp TODO) |
+| F05 Workout generator (incl. offline fallback) | GUI + CLI | [video](https://youtu.be/iMptiQ0aN4s) (timestamp TODO) |
+| F06 Set logger with undo/redo (incl. invalid input) | GUI + CLI | [video](https://youtu.be/iMptiQ0aN4s) (timestamp TODO) |
+| F07 Smart rest timer (incl. skip, +30s, HR hold) | GUI | [video](https://youtu.be/iMptiQ0aN4s) (timestamp TODO) |
+| F08 Fatigue sentinel and deload planner (incl. decline) | GUI + CLI | [video](https://youtu.be/iMptiQ0aN4s) (timestamp TODO) |
+| F09 AI coach (incl. medical guardrail) | GUI + CLI | [video](https://youtu.be/iMptiQ0aN4s) (timestamp TODO) |
+| F10 Audit exporter (incl. unwritable folder) | GUI + CLI | [video](https://youtu.be/iMptiQ0aN4s) (timestamp TODO) |
